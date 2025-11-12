@@ -1,3 +1,5 @@
+import SubmitButton from "../elements/SubmitButton";
+
 export default function NewFilmForm({
   titleValue,
   handleTitleInputChange,
@@ -11,7 +13,7 @@ export default function NewFilmForm({
   return (
     <form action="" onSubmit={handleSubmit}>
       {/* INPUTS */}
-      <div className="grid grid-cols-2 gap-8 my-4">
+      <div className="flex flex-col gap-8 my-4">
         {/* Input titolo */}
         <div>
           <label htmlFor="title" className="invisible absolute">
@@ -65,8 +67,8 @@ export default function NewFilmForm({
       </div>
 
       {/* SUBMIT BUTTON */}
-      <div className="text-end">
-        <button type="submit">Aggiungi film</button>
+      <div className="text-center">
+        <SubmitButton text={"Aggiungi film"} />
       </div>
     </form>
   );

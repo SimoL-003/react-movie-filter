@@ -16,7 +16,7 @@
     @apply text-black bg-white text-base font-normal;
   }
   h1 {
-    @apply text-3xl font-bold;
+    @apply text-4xl font-bold;
   }
 
   h2 {
@@ -46,6 +46,12 @@
 
   button {
     @apply bg-accent hover:bg-accent/60 cursor-pointer;
+  }
+
+  .film-form {
+    @apply fixed top-0 right-0 items-center bg-transparent backdrop-brightness-50;
+    width: 100vw;
+    height: 100vh;
   }
 
   .film-card {
