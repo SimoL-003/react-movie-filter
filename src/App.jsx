@@ -8,6 +8,7 @@ function App() {
   const [filteredList, setFilteredList] = useState(filmList);
   const [newFilmTitle, setNewFilmTitle] = useState("");
   const [newFilmGenre, setNewFilmGenre] = useState("");
+  const [newGenre, setNewGenre] = useState("");
 
   const genreList = [];
   for (let i = 0; i < filmList.length; i++) {
@@ -16,7 +17,7 @@ function App() {
     } else genreList.push(curFilm.genre);
   }
 
-  // Filtro per il genere
+  // Filtro
   useEffect(() => {
     genreFilter
       ? setFilteredList(
@@ -37,15 +38,17 @@ function App() {
         );
   }, [genreFilter, titleFilter, filmList]);
 
-  // Filtro per il titolo
-  useEffect(() => {}, [titleFilter, filmList]);
-
   function addFilm(e) {
     e.preventDefault();
-    const newFilm = { title: newFilmTitle, genre: newFilmGenre };
+
+    const filmGenre = newFilmGenre === "altro" ? newGenre : newFilmGenre;
+    const newFilm = { title: newFilmTitle, genre: filmGenre };
+
     setFilmList((prev) => [...prev, newFilm]);
+
     setNewFilmGenre("");
     setNewFilmTitle("");
+    setNewGenre("");
   }
 
   return (
@@ -75,6 +78,7 @@ function App() {
               name="filter-genre"
               id="filter-genre"
               className="px-2 py-1 border-2 border-black"
+              value={genreFilter}
               onChange={(e) => setGenreFilter(e.target.value)}
             >
               <option value="">--Scegli un genere--</option>
@@ -122,6 +126,16 @@ function App() {
                 ))}
                 <option value="altro">Altro</option>
               </select>
+
+              {newFilmGenre === "altro" && (
+                <input
+                  placeholder="Aggiungi un nuovo genere"
+                  required
+                  value={newGenre}
+                  onChange={(e) => setNewGenre(e.target.value)}
+                  className="px-2 py-1 border-2 border-black"
+                />
+              )}
 
               {/* Submit button */}
               <button
