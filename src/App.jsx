@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import initialFilmList from "./data/filmList.js"; /* title, genre */
+import Filter from "./components/widgets/Filter.jsx";
 
 function App() {
   const [filmList, setFilmList] = useState(initialFilmList);
@@ -53,47 +54,16 @@ function App() {
 
   return (
     <>
-      <main className="min-h-screen">
+      <main className="min-h-screen pt-16">
         {/* SEARCH FORM SECTION */}
-        <section className="pt-16">
-          <div className="container">
-            <h1 className="py-8">Il miglior catalogo per film</h1>
-
-            {/* Search form */}
-            <div className="grid grid-cols-2 gap-8">
-              {/* Title input */}
-              <label htmlFor="search-title" className="invisible absolute">
-                Cerca in base al titolo
-              </label>
-              <input
-                type="text"
-                name="search-title"
-                id="search-title"
-                placeholder="Cerca un film..."
-                value={titleFilter}
-                onChange={(e) => setTitleFilter(e.target.value)}
-              />
-
-              {/* Genre select */}
-              <label htmlFor="filter-genre" className="invisible absolute">
-                Scegli un genere:
-              </label>
-              <select
-                name="filter-genre"
-                id="filter-genre"
-                value={genreFilter}
-                onChange={(e) => setGenreFilter(e.target.value)}
-              >
-                <option value="">-- Filtra per genere --</option>
-                {genreList.map((curGenre, index) => (
-                  <option key={index} value={curGenre}>
-                    {curGenre}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-        </section>
+        <h1 className="container py-8">Il miglior catalogo per film</h1>
+        <Filter
+          titleInputValue={titleFilter}
+          onTitleInputChange={(e) => setTitleFilter(e.target.value)}
+          genreValue={genreFilter}
+          onGenreSelectChange={(e) => setGenreFilter(e.target.value)}
+          genreList={genreList}
+        />
 
         {/* ADD FILM FORM */}
         <section className="my-8">
