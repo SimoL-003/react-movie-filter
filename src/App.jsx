@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import initialFilmList from "./data/filmList.js"; /* title, genre */
 import Filter from "./components/widgets/Filter.jsx";
 import NewFilmForm from "./components/widgets/NewFilmForm.jsx";
+import FilmCard from "./components/widgets/FilmCard.jsx";
+import NoResult from "./components/elements/NoResult.jsx";
 
 function App() {
   const [filmList, setFilmList] = useState(initialFilmList);
@@ -91,14 +93,15 @@ function App() {
             <h2 className="py-4">I tuoi film</h2>
 
             <div className="film-container py-4">
-              <ul className="grid grid-cols-4 gap-4">
-                {filteredList.map((curFilm, index) => (
-                  <li className="film-card" key={index}>
-                    <h4 className="mb-4">{curFilm.title}</h4>
-                    <span className="badge">{curFilm.genre}</span>
-                  </li>
-                ))}
-              </ul>
+              {filteredList.length ? (
+                <ul className="grid grid-cols-4 gap-4">
+                  {filteredList.map((curFilm, index) => (
+                    <FilmCard key={index} curFilm={curFilm} />
+                  ))}
+                </ul>
+              ) : (
+                <NoResult />
+              )}
             </div>
           </div>
         </section>
