@@ -20,20 +20,23 @@ function App() {
       ? setFilteredList(
           filmList.filter(
             (curFilm) =>
-              curFilm.genre.toLowerCase() === genreFilter.toLowerCase()
+              curFilm.genre.toLowerCase() === genreFilter.toLowerCase() &&
+              curFilm.title
+                .toLowerCase()
+                .includes(titleFilter.trim().toLowerCase())
           )
         )
-      : setFilteredList(filmList);
-  }, [genreFilter, filmList]);
+      : setFilteredList(
+          filmList.filter((curFilm) =>
+            curFilm.title
+              .toLowerCase()
+              .includes(titleFilter.trim().toLowerCase())
+          )
+        );
+  }, [genreFilter, titleFilter, filmList]);
 
   // Filtro per il titolo
-  useEffect(() => {
-    setFilteredList(
-      filmList.filter((curFilm) =>
-        curFilm.title.toLowerCase().includes(titleFilter.toLowerCase())
-      )
-    );
-  }, [titleFilter, filmList]);
+  useEffect(() => {}, [titleFilter, filmList]);
 
   return (
     <>
