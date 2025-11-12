@@ -4,6 +4,7 @@ import Filter from "./components/widgets/Filter.jsx";
 import NewFilmForm from "./components/widgets/NewFilmForm.jsx";
 import FilmCard from "./components/widgets/FilmCard.jsx";
 import NoResult from "./components/elements/NoResult.jsx";
+import NewFilmFormModal from "./components/Modules/NewFilmFormModal.jsx";
 
 function App() {
   const [filmList, setFilmList] = useState(initialFilmList);
@@ -63,35 +64,19 @@ function App() {
         <h1 className="container py-8">Il miglior catalogo per film</h1>
 
         {/* ADD FILM FORM */}
-        <button
-          onClick={() => setShowForm(!showForm)}
-          className="rounded-full w-14 h-14 text-lg fixed bottom-8 right-8 hover:scale-150 z-40"
-        >
-          +
-        </button>
-        <section className={`film-form ${showForm ? "flex" : "hidden"}`}>
-          <div className="w-[60%] h-[70%] mx-auto my-auto p-[50px] flex flex-col justify-center gap-12 bg-light-gray rounded-2xl relative">
-            <h2 className="py-4 text-center text-3xl">
-              Aggiungi un nuovo film alla lista
-            </h2>
-            <button
-              className="rounded-full w-8 h-8 text-xs absolute top-4 right-4 z-40 bg-red-700 p-0 text-white border-0"
-              onClick={() => setShowForm(!showForm)}
-            >
-              x
-            </button>
-            <NewFilmForm
-              titleValue={newFilmTitle}
-              handleTitleInputChange={(e) => setNewFilmTitle(e.target.value)}
-              genreValue={newFilmGenre}
-              handleGenreSelectChange={(e) => setNewFilmGenre(e.target.value)}
-              genreList={genreList}
-              newGenre={newGenre}
-              handleNewGenreInputChange={(e) => setNewGenre(e.target.value)}
-              handleSubmit={addFilm}
-            />
-          </div>
-        </section>
+        <NewFilmFormModal
+          handleShowForm={() => setShowForm(!showForm)}
+          showForm={showForm}
+          handleCloseForm={() => setShowForm(!showForm)}
+          titleValue={newFilmTitle}
+          handleTitleInputChange={(e) => setNewFilmTitle(e.target.value)}
+          genreValue={newFilmGenre}
+          handleGenreSelectChange={(e) => setNewFilmGenre(e.target.value)}
+          genreList={genreList}
+          newGenre={newGenre}
+          handleNewGenreInputChange={(e) => setNewGenre(e.target.value)}
+          handleSubmit={addFilm}
+        />
 
         {/* SEARCH FORM SECTION */}
         <Filter
