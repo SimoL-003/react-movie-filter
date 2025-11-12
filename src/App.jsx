@@ -7,6 +7,13 @@ function App() {
   const [titleFilter, setTitleFilter] = useState("");
   const [filteredList, setFilteredList] = useState(filmList);
 
+  const genreList = [];
+  for (let i = 0; i < filmList.length; i++) {
+    const curFilm = filmList[i];
+    if (genreList.includes(curFilm.genre)) {
+    } else genreList.push(curFilm.genre);
+  }
+
   // Filtro per il genere
   useEffect(() => {
     genreFilter
@@ -58,10 +65,11 @@ function App() {
               onChange={(e) => setGenreFilter(e.target.value)}
             >
               <option value="">--Scegli un genere--</option>
-              <option value="fantascienza">Fantascienza</option>
-              <option value="thriller">Thriller</option>
-              <option value="romantico">Romantico</option>
-              <option value="azione">Azione</option>
+              {genreList.map((curGenre, index) => (
+                <option key={index} value={curGenre}>
+                  {curGenre}
+                </option>
+              ))}
             </select>
           </section>
 
