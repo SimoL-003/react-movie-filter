@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import initialFilmList from "./data/filmList.js"; /* title, genre */
 import Filter from "./components/widgets/Filter.jsx";
+import NewFilmForm from "./components/widgets/NewFilmForm.jsx";
 
 function App() {
   const [filmList, setFilmList] = useState(initialFilmList);
@@ -57,6 +58,7 @@ function App() {
       <main className="min-h-screen pt-16">
         {/* SEARCH FORM SECTION */}
         <h1 className="container py-8">Il miglior catalogo per film</h1>
+
         <Filter
           titleInputValue={titleFilter}
           onTitleInputChange={(e) => setTitleFilter(e.target.value)}
@@ -70,66 +72,16 @@ function App() {
           <div className="container">
             <h2 className="py-4">Aggiungi un nuovo film alla lista</h2>
 
-            <form action="" onSubmit={addFilm}>
-              {/* Inputs */}
-              <div className="grid grid-cols-2 gap-8 my-4">
-                {/* Input titolo */}
-                <div>
-                  <label htmlFor="title" className="invisible absolute">
-                    Titolo del film
-                  </label>
-                  <input
-                    type="text"
-                    name="title"
-                    id="title"
-                    required
-                    placeholder="Scrivi il titolo..."
-                    value={newFilmTitle}
-                    onChange={(e) => setNewFilmTitle(e.target.value)}
-                    className="w-full"
-                  />
-                </div>
-
-                {/* Select genere */}
-                <div className="flex gap-4">
-                  <label htmlFor="genre" className="invisible absolute">
-                    Scegli un genere:
-                  </label>
-                  <select
-                    required
-                    name="genre"
-                    id="genre"
-                    value={newFilmGenre}
-                    onChange={(e) => setNewFilmGenre(e.target.value)}
-                    className={newFilmGenre === "altro" ? "w-1/3" : "stretch"}
-                  >
-                    <option value="">-- Scegli un genere --</option>
-                    {genreList.map((curGenre, index) => (
-                      <option key={index} value={curGenre}>
-                        {curGenre}
-                      </option>
-                    ))}
-                    <option value="altro">Altro</option>
-                  </select>
-                  {newFilmGenre === "altro" && (
-                    <input
-                      id="custom-genre"
-                      name="custom-genre"
-                      placeholder="Aggiungi un nuovo genere"
-                      required
-                      value={newGenre}
-                      onChange={(e) => setNewGenre(e.target.value)}
-                      className="w-2/3"
-                    />
-                  )}
-                </div>
-              </div>
-
-              {/* Submit button */}
-              <div className="text-end">
-                <button type="submit">Aggiungi film</button>
-              </div>
-            </form>
+            <NewFilmForm
+              titleValue={newFilmTitle}
+              handleTitleInputChange={(e) => setNewFilmTitle(e.target.value)}
+              genreValue={newFilmGenre}
+              handleGenreSelectChange={(e) => setNewFilmGenre(e.target.value)}
+              genreList={genreList}
+              newGenre={newGenre}
+              handleNewGenreInputChange={(e) => setNewGenre(e.target.value)}
+              handleSubmit={addFilm}
+            />
           </div>
         </section>
 
