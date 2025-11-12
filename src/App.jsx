@@ -1,28 +1,32 @@
 import { useState, useEffect } from "react";
 import initialFilmList from "./data/filmList.js"; /* title, genre */
 
-/**
- * BASE
- * - Lista dei film creata dinamicamente
- * - Form che tramite menu a tendina permetta di selezionare il genere del film (uno o più??) => deve funzionare live, quindi senza submit button, quindi basta solo l'imput, non il form (??)
- * Di conseguenza, sistemare la lista dei film in modo che sia aggiornata sulla base del filtro
- *
- */
-
 function App() {
   const [filmList, setFilmList] = useState(initialFilmList);
-  const [filter, setFilter] = useState("");
+  const [genreFilter, setGenreFilter] = useState("");
+  const [titleFilter, setTitleFilter] = useState("");
   const [filteredList, setFilteredList] = useState(filmList);
 
+  // Filtro per il genere
   useEffect(() => {
-    filter
+    genreFilter
       ? setFilteredList(
           filmList.filter(
-            (curFilm) => curFilm.genre.toLowerCase() === filter.toLowerCase()
+            (curFilm) =>
+              curFilm.genre.toLowerCase() === genreFilter.toLowerCase()
           )
         )
       : setFilteredList(filmList);
-  }, [filter, filmList]);
+  }, [genreFilter, filmList]);
+
+  // Filtro per il titolo
+  useEffect(() => {
+    setFilteredList(
+      filmList.filter((curFilm) =>
+        curFilm.title.toLowerCase().includes(titleFilter.toLowerCase())
+      )
+    );
+  }, [titleFilter, filmList]);
 
   return (
     <>
@@ -31,6 +35,19 @@ function App() {
           <h1>Il nostro catalogo</h1>
 
           <section className="form my-8">
+            <label htmlFor="title" className="invisible">
+              Cerca in base al titolo
+            </label>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              placeholder="Cerca un film..."
+              value={titleFilter}
+              onChange={(e) => setTitleFilter(e.target.value)}
+              className="px-2 py-1 border-2 border-black mr-8"
+            />
+
             <label htmlFor="genre-select" className="mr-2">
               Scegli un genere:
             </label>
@@ -38,7 +55,7 @@ function App() {
               name="genre-select"
               id="genre-select"
               className="px-2 py-1 border-2 border-black"
-              onChange={(e) => setFilter(e.target.value)}
+              onChange={(e) => setGenreFilter(e.target.value)}
             >
               <option value="">--Scegli un genere--</option>
               <option value="fantascienza">Fantascienza</option>
