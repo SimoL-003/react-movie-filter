@@ -1,12 +1,55 @@
 @import "tailwindcss";
 
+@theme {
+  --color-light-gray: #f4f4f5;
+  --color-dark-gray: #6b7280;
+  --color-black: #111827;
+  --color-accent: #facc15;
+}
+
 @layer base {
+  * {
+    outline: none;
+  }
+  body {
+    font-family: "Inter", sans-serif;
+    @apply text-black bg-white text-base font-normal;
+  }
   h1 {
-    @apply text-4xl font-bold;
+    @apply text-3xl font-bold;
   }
 
   h2 {
-    @apply text-3xl font-semibold;
+    @apply text-2xl font-semibold;
+  }
+
+  h4 {
+    @apply text-xl font-semibold;
+  }
+
+  label,
+  button {
+    @apply text-sm font-medium;
+  }
+}
+
+@layer components {
+  input,
+  select,
+  button {
+    @apply border-2 border-dark-gray focus-visible:border-accent outline-0 rounded-md px-4 py-2 transition-all duration-150;
+  }
+
+  button {
+    @apply bg-accent hover:bg-accent/60 cursor-pointer;
+  }
+
+  .film-card {
+    @apply border-2 border-dark-gray bg-light-gray p-6 rounded-md;
+  }
+
+  .badge {
+    @apply px-3 py-2 bg-accent uppercase text-xs font-semibold rounded-md;
   }
 }
 
@@ -15,5 +58,9 @@
     width: 80%;
     max-width: 1200px;
     margin: 0 auto;
+  }
+
+  .stretch {
+    width: stretch;
   }
 }

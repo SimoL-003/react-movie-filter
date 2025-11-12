@@ -54,116 +54,132 @@ function App() {
   return (
     <>
       <main className="min-h-screen">
-        <div className="container py-16">
-          <h1>Il nostro catalogo</h1>
+        {/* SEARCH FORM SECTION */}
+        <section className="pt-16">
+          <div className="container">
+            <h1 className="py-8">Il miglior catalogo per film</h1>
 
-          <section className="search-form my-8">
-            <label htmlFor="search-title" className="invisible">
-              Cerca in base al titolo
-            </label>
-            <input
-              type="text"
-              name="search-title"
-              id="search-title"
-              placeholder="Cerca un film..."
-              value={titleFilter}
-              onChange={(e) => setTitleFilter(e.target.value)}
-              className="px-2 py-1 border-2 border-black mr-8"
-            />
-
-            <label htmlFor="filter-genre" className="mr-2">
-              Scegli un genere:
-            </label>
-            <select
-              name="filter-genre"
-              id="filter-genre"
-              className="px-2 py-1 border-2 border-black"
-              value={genreFilter}
-              onChange={(e) => setGenreFilter(e.target.value)}
-            >
-              <option value="">--Scegli un genere--</option>
-              {genreList.map((curGenre, index) => (
-                <option key={index} value={curGenre}>
-                  {curGenre}
-                </option>
-              ))}
-            </select>
-          </section>
-
-          <section className="add-form">
-            <h2 className="py-4">Aggiungi un nuovo film alla lista</h2>
-
-            <form action="" onSubmit={addFilm}>
-              {/* Input titolo */}
-              <label htmlFor="title">Titolo del film</label>
+            {/* Search form */}
+            <div className="grid grid-cols-2 gap-8">
+              {/* Title input */}
+              <label htmlFor="search-title" className="invisible absolute">
+                Cerca in base al titolo
+              </label>
               <input
                 type="text"
-                name="title"
-                id="title"
-                required
-                className="px-2 py-1 border-2 border-black mx-4"
-                value={newFilmTitle}
-                onChange={(e) => setNewFilmTitle(e.target.value)}
+                name="search-title"
+                id="search-title"
+                placeholder="Cerca un film..."
+                value={titleFilter}
+                onChange={(e) => setTitleFilter(e.target.value)}
               />
 
-              {/* Select genere */}
-              <label htmlFor="genre" className="mr-2">
+              {/* Genre select */}
+              <label htmlFor="filter-genre" className="invisible absolute">
                 Scegli un genere:
               </label>
               <select
-                required
-                name="genre"
-                id="genre"
-                className="px-2 py-1 border-2 border-black"
-                value={newFilmGenre}
-                onChange={(e) => setNewFilmGenre(e.target.value)}
+                name="filter-genre"
+                id="filter-genre"
+                value={genreFilter}
+                onChange={(e) => setGenreFilter(e.target.value)}
               >
-                <option value="">--Scegli un genere--</option>
+                <option value="">-- Filtra per genere --</option>
                 {genreList.map((curGenre, index) => (
                   <option key={index} value={curGenre}>
                     {curGenre}
                   </option>
                 ))}
-                <option value="altro">Altro</option>
               </select>
+            </div>
+          </div>
+        </section>
 
-              {newFilmGenre === "altro" && (
-                <input
-                  placeholder="Aggiungi un nuovo genere"
-                  required
-                  value={newGenre}
-                  onChange={(e) => setNewGenre(e.target.value)}
-                  className="px-2 py-1 border-2 border-black"
-                />
-              )}
+        {/* ADD FILM FORM */}
+        <section className="my-8">
+          <div className="container">
+            <h2 className="py-4">Aggiungi un nuovo film alla lista</h2>
+
+            <form action="" onSubmit={addFilm}>
+              {/* Inputs */}
+              <div className="grid grid-cols-2 gap-8 my-4">
+                {/* Input titolo */}
+                <div>
+                  <label htmlFor="title" className="invisible absolute">
+                    Titolo del film
+                  </label>
+                  <input
+                    type="text"
+                    name="title"
+                    id="title"
+                    required
+                    placeholder="Scrivi il titolo..."
+                    value={newFilmTitle}
+                    onChange={(e) => setNewFilmTitle(e.target.value)}
+                    className="w-full"
+                  />
+                </div>
+
+                {/* Select genere */}
+                <div className="flex gap-4">
+                  <label htmlFor="genre" className="invisible absolute">
+                    Scegli un genere:
+                  </label>
+                  <select
+                    required
+                    name="genre"
+                    id="genre"
+                    value={newFilmGenre}
+                    onChange={(e) => setNewFilmGenre(e.target.value)}
+                    className={newFilmGenre === "altro" ? "w-1/3" : "stretch"}
+                  >
+                    <option value="">-- Scegli un genere --</option>
+                    {genreList.map((curGenre, index) => (
+                      <option key={index} value={curGenre}>
+                        {curGenre}
+                      </option>
+                    ))}
+                    <option value="altro">Altro</option>
+                  </select>
+                  {newFilmGenre === "altro" && (
+                    <input
+                      id="custom-genre"
+                      name="custom-genre"
+                      placeholder="Aggiungi un nuovo genere"
+                      required
+                      value={newGenre}
+                      onChange={(e) => setNewGenre(e.target.value)}
+                      className="w-2/3"
+                    />
+                  )}
+                </div>
+              </div>
 
               {/* Submit button */}
-              <button
-                type="submit"
-                className="ml-4 px-2 py-1 border-2 border-black cursor-pointer"
-              >
-                Aggiungi film
-              </button>
+              <div className="text-end">
+                <button type="submit">Aggiungi film</button>
+              </div>
             </form>
-          </section>
+          </div>
+        </section>
 
-          <section className="catalogo my-8">
-            <h2>I film della settimana</h2>
+        {/* FILM CATALOGUE */}
+        <section className="mt-8">
+          <div className="container">
+            <h2 className="py-4">I tuoi film</h2>
 
             <div className="film-container py-4">
-              <ul className="grid grid-cols-5 gap-4">
+              <ul className="grid grid-cols-4 gap-4">
                 {filteredList.map((curFilm, index) => (
-                  <li className="p-4 border-2" key={index}>
+                  <li className="film-card" key={index}>
                     <h4 className="mb-4">{curFilm.title}</h4>
-                    <span className="px-2 py-2 bg-amber-300 capitalize text-sm">
-                      {curFilm.genre}
-                    </span>
+                    <span className="badge">{curFilm.genre}</span>
                   </li>
                 ))}
               </ul>
             </div>
-          </section>
-        </div>
+          </div>
+        </section>
       </main>
     </>
   );
