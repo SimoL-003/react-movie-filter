@@ -15,13 +15,17 @@ function App() {
   const [newFilmTitle, setNewFilmTitle] = useState("");
   const [newFilmGenre, setNewFilmGenre] = useState("");
   const [newGenre, setNewGenre] = useState("");
+  const [genreList, setGenreList] = useState([]);
 
-  const genreList = [];
-  for (let i = 0; i < filmList.length; i++) {
-    const curFilm = filmList[i];
-    if (genreList.includes(curFilm.genre)) {
-    } else genreList.push(curFilm.genre);
-  }
+  // Crea l'array dei generi
+  useEffect(() => {
+    for (let i = 0; i < filmList.length; i++) {
+      const curFilm = filmList[i];
+      if (genreList.includes(curFilm.genre) === false) {
+        genreList.push(curFilm.genre);
+      }
+    }
+  }, [filmList]);
 
   // Filtro
   useEffect(() => {
@@ -46,12 +50,22 @@ function App() {
 
   function addFilm(e) {
     e.preventDefault();
+    // Per avere la prima lettera maiuscola
+    let newGenreCapitalized;
+    if (newGenre) {
+      let firstLetter = newGenre[0].toUpperCase();
+      let remainingLetters = newGenre.slice(1);
+      newGenreCapitalized = firstLetter + remainingLetters;
+    }
 
-    const filmGenre = newFilmGenre === "altro" ? newGenre : newFilmGenre;
+    // Crea oggetto nuovo film
+    const filmGenre =
+      newFilmGenre === "altro" ? newGenreCapitalized : newFilmGenre;
     const newFilm = { title: newFilmTitle, genre: filmGenre };
 
     setFilmList((prev) => [...prev, newFilm]);
 
+    // Reset
     setNewFilmGenre("");
     setNewFilmTitle("");
     setNewGenre("");
