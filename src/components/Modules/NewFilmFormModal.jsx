@@ -27,7 +27,7 @@ export default function NewFilmFormModal({
 
       {/* FORM SECTION */}
       <section className={`film-form ${showForm ? "flex" : "hidden"}`}>
-        <div className="w-[60%] h-[70%] mx-auto my-auto p-[50px] flex flex-col justify-center bg-light-gray rounded-2xl relative">
+        <div className="w-[90vw] h-[90vh] sm:w-[60%] sm:h-[70%] mx-auto my-auto p-[50px] flex flex-col justify-center bg-light-gray rounded-2xl relative">
           <h2 className=" my-10 text-center text-3xl">
             Aggiungi un nuovo film alla lista
           </h2>
