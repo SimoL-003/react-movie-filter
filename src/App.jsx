@@ -60,7 +60,7 @@ function App() {
 
   return (
     <>
-      <main className="min-h-screen pt-16">
+      <main className="min-h-screen pt-8 lg:pt-16">
         <h1 className="container py-8">Il miglior catalogo per film</h1>
 
         {/* ADD FILM FORM */}
@@ -94,7 +94,7 @@ function App() {
 
             <div className="film-container py-4">
               {filteredList.length ? (
-                <ul className="grid grid-cols-4 gap-4">
+                <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                   {filteredList.map((curFilm, index) => (
                     <FilmCard key={index} curFilm={curFilm} />
                   ))}

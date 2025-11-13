@@ -18,13 +18,15 @@ export default function NewFilmFormModal({
       {" "}
       <button
         onClick={handleShowForm}
-        className="rounded-full w-14 h-14 text-lg fixed bottom-8 right-8 hover:scale-150 z-40"
+        className={`rounded-full w-14 h-14 md:w-fit md:h-auto text-lg fixed bottom-8 right-8 hover:scale-120 z-40 shadow-2xl ${
+          showForm ? "hidden" : "block"
+        }`}
       >
-        +
+        <span className="hidden md:inline">Aggiungi film </span>+
       </button>
       <section className={`film-form ${showForm ? "flex" : "hidden"}`}>
-        <div className="w-[60%] h-[70%] mx-auto my-auto p-[50px] flex flex-col justify-center gap-12 bg-light-gray rounded-2xl relative">
-          <h2 className="py-4 text-center text-3xl">
+        <div className="w-[60%] h-[70%] mx-auto my-auto p-[50px] flex flex-col justify-center bg-light-gray rounded-2xl relative">
+          <h2 className=" my-10 text-center text-3xl">
             Aggiungi un nuovo film alla lista
           </h2>
           <button

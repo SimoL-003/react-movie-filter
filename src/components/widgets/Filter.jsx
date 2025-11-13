@@ -8,7 +8,7 @@ export default function Filter({
   return (
     <section>
       <div className="container">
-        <div className="grid grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
           {/* Title input */}
           <label htmlFor="search-title" className="invisible absolute">
             Cerca in base al titolo

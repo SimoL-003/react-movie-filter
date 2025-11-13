@@ -13,7 +13,7 @@ export default function NewFilmForm({
   return (
     <form action="" onSubmit={handleSubmit}>
       {/* INPUTS */}
-      <div className="flex flex-col gap-8 my-4">
+      <div className="flex flex-col gap-8">
         {/* Input titolo */}
         <div>
           <label htmlFor="title" className="invisible absolute">
@@ -32,7 +32,7 @@ export default function NewFilmForm({
         </div>
 
         {/* Select genere */}
-        <div className="flex gap-4">
+        <div className="flex flex-col md:flex-row gap-4">
           <label htmlFor="genre" className="invisible absolute">
             Scegli un genere:
           </label>
@@ -42,7 +42,7 @@ export default function NewFilmForm({
             id="genre"
             value={genreValue}
             onChange={handleGenreSelectChange}
-            className={genreValue === "altro" ? "w-1/3" : "stretch"}
+            className={genreValue === "altro" ? "stretch md:w-1/3" : "stretch"}
           >
             <option value="">-- Scegli un genere --</option>
             {genreList.map((curGenre, index) => (
@@ -60,14 +60,14 @@ export default function NewFilmForm({
               required
               value={newGenre}
               onChange={handleNewGenreInputChange}
-              className="w-2/3"
+              className="stretch md:w-2/3"
             />
           )}
         </div>
       </div>
 
       {/* SUBMIT BUTTON */}
-      <div className="text-center">
+      <div className="text-center my-10">
         <SubmitButton text={"Aggiungi film"} />
       </div>
     </form>
