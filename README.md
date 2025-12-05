@@ -7,7 +7,7 @@ L’interfaccia è semplice, responsive e include un modale per l’inserimento 
 
 ---
 
-## Descrizione
+### Descrizione
 
 Questo progetto permette di visualizzare un elenco di film predefinito e di filtrarli dinamicamente tramite un form di ricerca.  
 L’utente può inoltre aggiungere nuovi film selezionando un genere esistente oppure creando un genere personalizzato.
@@ -16,7 +16,7 @@ Il sistema di filtri permette combinazioni: è possibile filtrare per titolo, pe
 
 ---
 
-## Tecnologie utilizzate
+### Tecnologie utilizzate
 
 - **React** — struttura dell’applicazione e gestione dello stato
 - **JavaScript** — logica dei filtri e del form
@@ -25,7 +25,7 @@ Il sistema di filtri permette combinazioni: è possibile filtrare per titolo, pe
 
 ---
 
-## Funzionalità principali
+### Funzionalità principali
 
 - Visualizzazione dinamica del catalogo film
 - Filtri in tempo reale per:
@@ -41,7 +41,7 @@ Il sistema di filtri permette combinazioni: è possibile filtrare per titolo, pe
 
 ---
 
-## Logica di funzionamento
+### Logica di funzionamento
 
 1. L’app parte da una lista iniziale di film predefiniti.
 2. Il sistema genera automaticamente l’elenco dei generi presenti.
@@ -54,6 +54,6 @@ Il sistema di filtri permette combinazioni: è possibile filtrare per titolo, pe
 
 ---
 
-## Risultato
+### Risultato
 
 [https://react-catalogue-movie-filter.netlify.app/](https://react-catalogue-movie-filter.netlify.app/)
